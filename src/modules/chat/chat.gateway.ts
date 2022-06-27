@@ -23,7 +23,7 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 
     @SubscribeMessage('sendMessage')
     handleMessage(client: Socket, message: { user: string, room: string, text: string }) {
-      this.server.emit('receiveMessage', message);
+      this.server.to(message.room).emit('receiveMessage', message);
     }
   
     @SubscribeMessage('joinRoom')
